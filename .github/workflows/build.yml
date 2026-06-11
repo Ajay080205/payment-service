@@ -1,0 +1,35 @@
+name: Payment Service CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Grant Execute Permission
+        run: chmod +x mvnw
+
+      - name: Build Project
+        run:  ./mvnw clean install
+
+      - name: Run Tests
+        run: ./mvnw testi have github 
